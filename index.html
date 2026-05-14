@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Local Encrypted Messenger</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Local session</p>
+          <h1>Encrypted Messenger</h1>
+        </div>
+        <div id="statusPill" class="status-pill" data-state="setup">Setup</div>
+      </header>
+
+      <main class="layout">
+        <section id="setupPanel" class="panel setup-panel" aria-labelledby="setupTitle">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Start</p>
+              <h2 id="setupTitle">Key Exchange</h2>
+            </div>
+            <button id="resetKeyBtn" class="ghost-button" type="button">New Key</button>
+          </div>
+
+          <label for="publicKey">Your public key</label>
+          <div class="key-row">
+            <textarea id="publicKey" readonly rows="3"></textarea>
+            <button id="copyPublicBtn" class="side-button" type="button">Copy</button>
+          </div>
+
+          <label for="peerKey">Peer public key</label>
+          <textarea id="peerKey" rows="4" placeholder="Paste the other public key"></textarea>
+
+          <div class="action-row">
+            <button id="startBtn" class="primary-button" type="button">Start Session</button>
+          </div>
+          <p id="setupError" class="error-text" role="alert"></p>
+        </section>
+
+        <section id="chatPanel" class="panel chat-panel is-hidden" aria-labelledby="chatTitle">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Ready</p>
+              <h2 id="chatTitle">Messenger Mode</h2>
+            </div>
+            <button id="newSessionBtn" class="ghost-button" type="button">New Session</button>
+          </div>
+
+          <div id="thread" class="thread" aria-live="polite"></div>
+
+          <form id="sendForm" class="composer">
+            <label for="messageInput">Message</label>
+            <div class="composer-row">
+              <textarea id="messageInput" rows="3" placeholder="Type a message"></textarea>
+              <button class="primary-button" type="submit">Encrypt</button>
+            </div>
+          </form>
+
+          <div id="encryptedBlock" class="encrypted-output is-hidden">
+            <label for="encryptedOutput">Encrypted text</label>
+            <div class="key-row">
+              <textarea id="encryptedOutput" readonly rows="4"></textarea>
+              <button id="copyEncryptedBtn" class="side-button" type="button">Copy</button>
+            </div>
+          </div>
+
+          <form id="receiveForm" class="receive-panel">
+            <label for="encryptedInput">Received encrypted text</label>
+            <textarea id="encryptedInput" rows="4" placeholder="Paste encrypted text"></textarea>
+            <div class="action-row">
+              <button class="secondary-button" type="submit">Decrypt</button>
+              <button id="clearReceivedBtn" class="ghost-button" type="button">Clear</button>
+            </div>
+          </form>
+
+          <p id="chatError" class="error-text" role="alert"></p>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
